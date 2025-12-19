@@ -31,10 +31,10 @@ export default function RegisterForm() {
           );
           setError(errorMessages.join(', '));
         } else {
-          setError('Registration failed');
+          setError('Ошибка регистрации');
         }
       } else {
-        setError('Network error. Please try again.');
+        setError('Ошибка сети. Пожалуйста, попробуйте снова.');
       }
     } finally {
       setLoading(false);
@@ -43,11 +43,11 @@ export default function RegisterForm() {
 
   return (
     <div style={styles.container}>
-      <h1 style={styles.title}>User Registration</h1>
+      <h1 style={styles.title}>Регистрация пользователя</h1>
       <form onSubmit={handleSubmit} style={styles.form}>
         <div style={styles.formGroup}>
           <label htmlFor="login" style={styles.label}>
-            Login:
+            Логин:
           </label>
           <input
             id="login"
@@ -59,12 +59,12 @@ export default function RegisterForm() {
             maxLength={32}
             pattern="[a-zA-Z0-9._-]+"
             style={styles.input}
-            placeholder="3-32 chars, letters/numbers/._-"
+            placeholder="3-32 символа, буквы/цифры/._-"
           />
         </div>
         <div style={styles.formGroup}>
           <label htmlFor="password" style={styles.label}>
-            Password:
+            Пароль:
           </label>
           <input
             id="password"
@@ -74,7 +74,7 @@ export default function RegisterForm() {
             required
             minLength={8}
             style={styles.input}
-            placeholder="Min 8 chars, uppercase, lowercase, digit, special"
+            placeholder="Мин. 8 символов, заглавная, строчная, цифра, спецсимвол"
           />
         </div>
         <button
@@ -82,7 +82,7 @@ export default function RegisterForm() {
           disabled={loading}
           style={loading ? { ...styles.button, ...styles.buttonDisabled } : styles.button}
         >
-          {loading ? 'Registering...' : 'Register'}
+          {loading ? 'Регистрация...' : 'Зарегистрироваться'}
         </button>
       </form>
       {message && <div style={styles.successMessage}>{message}</div>}
