@@ -60,5 +60,5 @@ async def register(
     
     logger.info(f"User registered successfully: login='{request.login}'")
     
-    return RegisterResponse(message="user created")
+    return RegisterResponse(message="user создан")
 

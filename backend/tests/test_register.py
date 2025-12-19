@@ -149,7 +149,7 @@ async def test_register_success(client: AsyncClient):
         }
     )
     assert response.status_code == 201
-    assert response.json() == {"message": "user created"}
+    assert response.json() == {"message": "user создан"}
 
 
 @pytest.mark.asyncio
