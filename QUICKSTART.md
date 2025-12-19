@@ -1,57 +1,56 @@
-# Quick Start Guide
+# Руководство по быстрому старту
 
-## One Command to Rule Them All
+## Одна команда для всего
 
 ```bash
 docker compose up --build
 ```
 
-That's it! This single command will:
-1. Build all Docker images
-2. Start PostgreSQL database
-3. Start FastAPI backend (port 8000)
-4. Start React frontend (port 5173)
+Вот и всё! Эта единственная команда:
+1. Соберет все Docker образы
+2. Запустит PostgreSQL базу данных
+3. Запустит FastAPI backend (порт 8000)
+4. Запустит React frontend (порт 5173)
 
-## Access Points
+## Точки доступа
 
 - **Frontend UI**: http://localhost:5173
 - **Backend API**: http://localhost:8000
-- **API Docs**: http://localhost:8000/docs
+- **Документация API**: http://localhost:8000/docs
 
-## Test Registration
+## Тестовая регистрация
 
-### Via Frontend
-1. Open http://localhost:5173
-2. Enter login: `testuser`
-3. Enter password: `Password123!`
-4. Click Register
+### Через Frontend
+1. Откройте http://localhost:5173
+2. Введите логин: `testuser`
+3. Введите пароль: `Password123!`
+4. Нажмите Зарегистрироваться
 
-### Via curl
+### Через curl
 ```bash
 curl -X POST http://localhost:8000/api/register \
   -H "Content-Type: application/json" \
   -d '{"login":"testuser","password":"Password123!"}'
 ```
 
-## Run Tests
+## Запуск тестов
 
 ```bash
 docker compose exec backend pytest tests/ -v
 ```
 
-## Stop Everything
+## Остановка всего
 
 ```bash
 docker compose down
 ```
 
-## Troubleshooting
+## Решение проблем
 
-**Port conflicts?** Check if ports 8000, 5173, or 5432 are in use.
+**Конфликты портов?** Проверьте, используются ли порты 8000, 5173 или 5432.
 
-**Can't connect?** Wait a few seconds for all services to start, then check:
+**Не можете подключиться?** Подождите несколько секунд, пока все сервисы запустятся, затем проверьте:
 ```bash
 docker compose ps
 docker compose logs
 ```
-

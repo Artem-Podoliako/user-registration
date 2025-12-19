@@ -1,15 +1,15 @@
-# User Registration MVP
+# MVP Регистрации Пользователей
 
-A complete minimum viable product (MVP) implementing a user registration system with a modern full-stack architecture.
+Полноценный минимально жизнеспособный продукт (MVP), реализующий систему регистрации пользователей с современной full-stack архитектурой.
 
-## Architecture
+## Архитектура
 
 - **Frontend**: React + TypeScript + Vite
 - **Backend**: FastAPI (Python)
-- **Database**: PostgreSQL
-- **Containerization**: Docker Compose
+- **База данных**: PostgreSQL
+- **Контейнеризация**: Docker Compose
 
-## Project Structure
+## Структура проекта
 
 ```
 project/
@@ -43,44 +43,44 @@ project/
  └── README.md
 ```
 
-## Quick Start
+## Быстрый старт
 
-### Prerequisites
+### Требования
 
-- Docker and Docker Compose installed
-- Git (optional, for cloning)
+- Установленные Docker и Docker Compose
+- Git (опционально, для клонирования)
 
-### Running the Application
+### Запуск приложения
 
-1. **Clone or navigate to the project directory**
+1. **Клонируйте или перейдите в директорию проекта**
 
-2. **Start all services with a single command:**
+2. **Запустите все сервисы одной командой:**
 
 ```bash
 docker compose up --build
 ```
 
-This command will:
-- Build the frontend, backend, and database containers
-- Start PostgreSQL database
-- Start FastAPI backend on port 8000
-- Start React frontend on port 5173
-- Set up networking between services
+Эта команда:
+- Соберет контейнеры frontend, backend и базы данных
+- Запустит PostgreSQL базу данных
+- Запустит FastAPI backend на порту 8000
+- Запустит React frontend на порту 5173
+- Настроит сетевые соединения между сервисами
 
-3. **Access the application:**
+3. **Откройте приложение:**
 
 - **Frontend**: http://localhost:5173
 - **Backend API**: http://localhost:8000
-- **API Documentation**: http://localhost:8000/docs (Swagger UI)
-- **Alternative API Docs**: http://localhost:8000/redoc
+- **Документация API**: http://localhost:8000/docs (Swagger UI)
+- **Альтернативная документация API**: http://localhost:8000/redoc
 
-### Stopping the Application
+### Остановка приложения
 
 ```bash
 docker compose down
 ```
 
-To also remove volumes (database data):
+Для удаления volumes (данных базы данных):
 
 ```bash
 docker compose down -v
@@ -90,9 +90,9 @@ docker compose down -v
 
 ### POST /api/register
 
-Register a new user.
+Регистрация нового пользователя.
 
-**Request Body:**
+**Тело запроса:**
 ```json
 {
   "login": "user123",
@@ -100,40 +100,40 @@ Register a new user.
 }
 ```
 
-**Validation Rules:**
-- `login`: 3-32 characters, only letters, numbers, dots, underscores, or hyphens
-- `password`: Minimum 8 characters, must include:
-  - At least one uppercase letter
-  - At least one lowercase letter
-  - At least one digit
-  - At least one special character
+**Правила валидации:**
+- `login`: 3-32 символа, только буквы, цифры, точки, подчеркивания или дефисы
+- `password`: Минимум 8 символов, должен содержать:
+  - Хотя бы одну заглавную букву
+  - Хотя бы одну строчную букву
+  - Хотя бы одну цифру
+  - Хотя бы один специальный символ
 
-**Responses:**
+**Ответы:**
 
-- **201 Created**: Success
+- **201 Created**: Успех
   ```json
   {
     "message": "user created"
   }
   ```
 
-- **422 Unprocessable Entity**: Validation error
+- **422 Unprocessable Entity**: Ошибка валидации
   ```json
   {
     "detail": "Password must contain at least one uppercase letter"
   }
   ```
 
-- **409 Conflict**: Duplicate login
+- **409 Conflict**: Дублирующийся логин
   ```json
   {
     "detail": "Login already exists"
   }
   ```
 
-## Example Usage
+## Примеры использования
 
-### Using curl
+### Использование curl
 
 ```bash
 curl -X POST http://localhost:8000/api/register \
@@ -141,91 +141,91 @@ curl -X POST http://localhost:8000/api/register \
   -d '{"login":"testuser","password":"Password123!"}'
 ```
 
-### Using the Frontend
+### Использование Frontend
 
-1. Open http://localhost:5173 in your browser
-2. Fill in the registration form:
-   - **Login**: Enter a username (3-32 chars, letters/numbers/._-)
-   - **Password**: Enter a strong password (min 8 chars with uppercase, lowercase, digit, special char)
-3. Click "Register"
-4. On success, you'll see "user created" message
-5. On error, validation messages will be displayed
+1. Откройте http://localhost:5173 в браузере
+2. Заполните форму регистрации:
+   - **Логин**: Введите имя пользователя (3-32 символа, буквы/цифры/._-)
+   - **Пароль**: Введите надежный пароль (мин. 8 символов с заглавной, строчной буквой, цифрой и спецсимволом)
+3. Нажмите "Зарегистрироваться"
+4. При успехе вы увидите сообщение "user created"
+5. При ошибке будут отображены сообщения валидации
 
-## Testing
+## Тестирование
 
-### Running Backend Tests
+### Запуск тестов Backend
 
 ```bash
-# Enter the backend container
+# Войдите в контейнер backend
 docker compose exec backend bash
 
-# Run tests
+# Запустите тесты
 pytest tests/ -v
 ```
 
-Or run tests directly:
+Или запустите тесты напрямую:
 
 ```bash
 docker compose exec backend pytest tests/ -v
 ```
 
-### Test Coverage
+### Покрытие тестами
 
-The test suite includes:
+Набор тестов включает:
 
-1. **test_register_success**: Tests successful user registration
-2. **test_register_duplicate_login**: Tests 409 error on duplicate login
-3. **test_weak_password**: Tests 422 error on invalid password strength
+1. **test_register_success**: Тестирует успешную регистрацию пользователя
+2. **test_register_duplicate_login**: Тестирует ошибку 409 при дублирующемся логине
+3. **test_weak_password**: Тестирует ошибку 422 при слабом пароле
 
-## Environment Variables
+## Переменные окружения
 
-The application uses environment variables defined in `.env` file. See `.env.example` for reference.
+Приложение использует переменные окружения, определенные в файле `.env`. См. `.env.example` для справки.
 
-### Backend Variables
+### Переменные Backend
 
-- `DATABASE_URL`: PostgreSQL connection string
-- `HASH_SCHEME`: Password hashing scheme (argon2)
-- `SECRET_KEY`: Secret key for application
-- `APP_ENV`: Environment (development/production)
-- `PORT`: Backend port (default: 8000)
-- `ARGON2_TIME_COST`: Argon2 time cost parameter
-- `ARGON2_MEMORY_COST`: Argon2 memory cost parameter
-- `ARGON2_PARALLELISM`: Argon2 parallelism parameter
+- `DATABASE_URL`: Строка подключения к PostgreSQL
+- `HASH_SCHEME`: Схема хеширования паролей (argon2)
+- `SECRET_KEY`: Секретный ключ приложения
+- `APP_ENV`: Окружение (development/production)
+- `PORT`: Порт backend (по умолчанию: 8000)
+- `ARGON2_TIME_COST`: Параметр времени Argon2
+- `ARGON2_MEMORY_COST`: Параметр памяти Argon2
+- `ARGON2_PARALLELISM`: Параметр параллелизма Argon2
 
-### Frontend Variables
+### Переменные Frontend
 
-- `VITE_API_URL`: Backend API URL (default: http://localhost:8000)
+- `VITE_API_URL`: URL API backend (по умолчанию: http://localhost:8000)
 
-## Security Features
+## Функции безопасности
 
-### What's Implemented
+### Что реализовано
 
-✅ **No Plaintext Passwords**: All passwords are hashed using Argon2id before storage
+✅ **Без паролей в открытом виде**: Все пароли хешируются с использованием Argon2id перед сохранением
 
-✅ **Argon2id Hashing**: Industry-standard password hashing with configurable parameters:
-- Time cost: 3 (configurable via `ARGON2_TIME_COST`)
-- Memory cost: 65536 KB (configurable via `ARGON2_MEMORY_COST`)
-- Parallelism: 4 (configurable via `ARGON2_PARALLELISM`)
+✅ **Хеширование Argon2id**: Отраслевой стандарт хеширования паролей с настраиваемыми параметрами:
+- Время: 3 (настраивается через `ARGON2_TIME_COST`)
+- Память: 65536 KB (настраивается через `ARGON2_MEMORY_COST`)
+- Параллелизм: 4 (настраивается через `ARGON2_PARALLELISM`)
 
-✅ **Unique Login Constraint**: Database enforces unique login values
+✅ **Ограничение уникальности логина**: База данных обеспечивает уникальность значений логина
 
-✅ **No Password Logging**: Passwords are never logged, only login names are logged for successful registrations
+✅ **Без логирования паролей**: Пароли никогда не логируются, только имена пользователей логируются для успешных регистраций
 
-✅ **Input Validation**: Both frontend and backend validate input according to security rules
+✅ **Валидация входных данных**: И frontend, и backend валидируют входные данные согласно правилам безопасности
 
-✅ **CORS Protection**: CORS middleware configured to allow only specific origins
+✅ **Защита CORS**: CORS middleware настроен для разрешения только определенных источников
 
-### Password Requirements
+### Требования к паролю
 
-- Minimum 8 characters
-- At least one uppercase letter (A-Z)
-- At least one lowercase letter (a-z)
-- At least one digit (0-9)
-- At least one special character (!@#$%^&*(),.?":{}|<>)
+- Минимум 8 символов
+- Хотя бы одна заглавная буква (A-Z)
+- Хотя бы одна строчная буква (a-z)
+- Хотя бы одна цифра (0-9)
+- Хотя бы один специальный символ (!@#$%^&*(),.?":{}|<>)
 
-## Database Schema
+## Схема базы данных
 
-### Users Table
+### Таблица Users
 
 ```sql
 CREATE TABLE users (
@@ -236,95 +236,94 @@ CREATE TABLE users (
 );
 ```
 
-- `id`: Auto-incrementing primary key
-- `login`: Unique username (3-32 characters)
-- `password_hash`: Argon2id hashed password
-- `created_at`: Timestamp of account creation
+- `id`: Автоинкрементируемый первичный ключ
+- `login`: Уникальное имя пользователя (3-32 символа)
+- `password_hash`: Хешированный пароль Argon2id
+- `created_at`: Временная метка создания аккаунта
 
-## Development
+## Разработка
 
-### Backend Development
+### Разработка Backend
 
-The backend uses:
-- **FastAPI**: Modern Python web framework
-- **SQLAlchemy**: Async ORM for database operations
-- **Pydantic**: Data validation and settings management
-- **Argon2**: Password hashing library
+Backend использует:
+- **FastAPI**: Современный Python веб-фреймворк
+- **SQLAlchemy**: Асинхронный ORM для операций с базой данных
+- **Pydantic**: Валидация данных и управление настройками
+- **Argon2**: Библиотека хеширования паролей
 
-### Frontend Development
+### Разработка Frontend
 
-The frontend uses:
-- **React 18**: UI library
-- **TypeScript**: Type-safe JavaScript
-- **Vite**: Fast build tool and dev server
-- **Axios**: HTTP client for API calls
+Frontend использует:
+- **React 18**: UI библиотека
+- **TypeScript**: Типобезопасный JavaScript
+- **Vite**: Быстрый инструмент сборки и dev сервер
+- **Axios**: HTTP клиент для API вызовов
 
-### Code Quality
+### Качество кода
 
-- Type-safe code (TypeScript + Pydantic)
-- PEP 8 compliant Python code
-- Structured logging (INFO/ERROR levels)
-- Comprehensive error handling
-- OpenAPI documentation (available at `/docs`)
+- Типобезопасный код (TypeScript + Pydantic)
+- Python код, соответствующий PEP 8
+- Структурированное логирование (уровни INFO/ERROR)
+- Комплексная обработка ошибок
+- Документация OpenAPI (доступна на `/docs`)
 
-## Logging
+## Логирование
 
-The application uses Python's `logging` module with structured output:
+Приложение использует модуль `logging` Python со структурированным выводом:
 
-- **INFO**: Successful operations (e.g., "User registered successfully")
-- **ERROR**: Failed operations (e.g., "Registration failed: duplicate login")
+- **INFO**: Успешные операции (например, "User registered successfully")
+- **ERROR**: Неудачные операции (например, "Registration failed: duplicate login")
 
-Passwords are **never** logged, only login names are logged for audit purposes.
+Пароли **никогда** не логируются, только имена пользователей логируются для целей аудита.
 
-## API Documentation
+## Документация API
 
-FastAPI automatically generates interactive API documentation:
+FastAPI автоматически генерирует интерактивную документацию API:
 
 - **Swagger UI**: http://localhost:8000/docs
 - **ReDoc**: http://localhost:8000/redoc
 
-## Troubleshooting
+## Решение проблем
 
-### Port Already in Use
+### Порт уже используется
 
-If ports 8000, 5173, or 5432 are already in use:
+Если порты 8000, 5173 или 5432 уже используются:
 
-1. Stop the conflicting service, or
-2. Modify ports in `docker-compose.yml`
+1. Остановите конфликтующий сервис, или
+2. Измените порты в `docker-compose.yml`
 
-### Database Connection Issues
+### Проблемы с подключением к базе данных
 
-If the backend can't connect to the database:
+Если backend не может подключиться к базе данных:
 
-1. Ensure the database container is healthy: `docker compose ps`
-2. Check database logs: `docker compose logs db`
-3. Verify `DATABASE_URL` in `.env` matches docker-compose settings
+1. Убедитесь, что контейнер базы данных здоров: `docker compose ps`
+2. Проверьте логи базы данных: `docker compose logs db`
+3. Проверьте, что `DATABASE_URL` в `.env` соответствует настройкам docker-compose
 
-### Frontend Can't Reach Backend
+### Frontend не может подключиться к Backend
 
-1. Verify `VITE_API_URL` in `.env` is correct
-2. Check CORS settings in `backend/main.py`
-3. Ensure both containers are on the same Docker network
+1. Проверьте, что `VITE_API_URL` в `.env` правильный
+2. Проверьте настройки CORS в `backend/main.py`
+3. Убедитесь, что оба контейнера находятся в одной Docker сети
 
 ## Git Contribution
 
-This project follows a clean architecture with separate concerns:
+Этот проект следует чистой архитектуре с разделением ответственности:
 
-- **Frontend** (`frontend/`): React application with TypeScript
-- **Backend** (`backend/`): FastAPI application with Python
-- **Database**: PostgreSQL schema and migrations
-- **Infrastructure**: Docker Compose configuration
+- **Frontend** (`frontend/`): React приложение с TypeScript
+- **Backend** (`backend/`): FastAPI приложение с Python
+- **База данных**: Схема PostgreSQL и миграции
+- **Инфраструктура**: Конфигурация Docker Compose
 
-Each component is independently testable and deployable.
+Каждый компонент независимо тестируем и развертываем.
 
-## License
+## Лицензия
 
-This is an MVP project for demonstration purposes.
+Это MVP проект для демонстрационных целей.
 
-## Support
+## Поддержка
 
-For issues or questions, please check:
-1. API documentation at http://localhost:8000/docs
-2. Application logs: `docker compose logs`
-3. Container status: `docker compose ps`
-
+По вопросам или проблемам, пожалуйста, проверьте:
+1. Документацию API на http://localhost:8000/docs
+2. Логи приложения: `docker compose logs`
+3. Статус контейнеров: `docker compose ps`
